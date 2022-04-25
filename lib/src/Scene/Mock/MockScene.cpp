@@ -33,6 +33,11 @@ void MockScene::addItemAtPath(MockItem item, const ItemPath& path)
     m_items.emplace(std::make_pair(path.string(), std::move(item)));
 }
 
+std::vector<std::string> MockScene::searchEveryCompletePath(const ItemPath&)
+{
+    return {};
+}
+
 MockEvents& MockScene::mockEvents()
 {
     return m_events;

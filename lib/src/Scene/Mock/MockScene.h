@@ -25,6 +25,7 @@ public:
 
     // Tasks
     void takeScreenshot(const ItemPath& targetItem, const std::string& filePath) override;
+    std::vector<std::string> searchEveryCompletePath(const ItemPath&) override;
 
     // Mock stuff
     void addItemAtPath(MockItem item, const ItemPath& path);

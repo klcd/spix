@@ -9,6 +9,7 @@
 #include <QDateTime>
 #include <QQmlContext>
 #include <QQuickItem>
+#include <QString>
 #include <stdexcept>
 
 namespace spix {
@@ -294,6 +295,45 @@ std::vector<QGenericArgument> ConvertAndCreateQArgumentsForMethod(
             qtArgs.push_back(QGenericArgument());
     }
     return qtArgs;
+}
+
+void SearchEveryCompletePath(QObject* object, const QString& name, std::vector<std::string>& pathsList, QString path)
+{
+    char sep = '/';
+
+    if (auto qquickitem = qobject_cast<const QQuickItem*>(object)) {
+        for (auto child : qquickitem->childItems()) {
+            auto current_item_name = GetObjectName(child);
+
+            auto new_path = QString(path);
+            if (!current_item_name.isEmpty()) {
+                new_path.append(sep).append(current_item_name);
+            }
+
+            if (current_item_name == name) {
+                pathsList.push_back(new_path.toStdString().c_str());
+                return;
+            }
+            SearchEveryCompletePath(child, name, pathsList, new_path);
+        }
+    } else {
+        for (auto child : object->children()) {
+            auto current_item_name = GetObjectName(child);
+
+            auto new_path = QString(path);
+            if (!current_item_name.isEmpty()) {
+                new_path.append(sep).append(current_item_name);
+            }
+
+            if (current_item_name == name) {
+                pathsList.push_back(new_path.toStdString().c_str());
+                return;
+            }
+            SearchEveryCompletePath(child, name, pathsList, new_path);
+        }
+    }
+
+    return;
 }
 
 } // namespace qt
