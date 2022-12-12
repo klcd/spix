@@ -14,6 +14,7 @@
 #include <Commands/DragEnd.h>
 #include <Commands/DropFromExt.h>
 #include <Commands/EnterKey.h>
+#include <Commands/Exists.h>
 #include <Commands/ExistsAndVisible.h>
 #include <Commands/GetBoundingBox.h>
 #include <Commands/GetProperty.h>
@@ -135,6 +136,16 @@ Rect TestServer::getBoundingBox(ItemPath path)
     std::promise<Rect> promise;
     auto result = promise.get_future();
     auto cmd = std::make_unique<cmd::GetBoundingBox>(path, std::move(promise));
+    m_cmdExec->enqueueCommand(std::move(cmd));
+
+    return result.get();
+}
+
+bool TestServer::exists(ItemPath path)
+{
+    std::promise<bool> promise;
+    auto result = promise.get_future();
+    auto cmd = std::make_unique<cmd::Exists>(path, std::move(promise));
     m_cmdExec->enqueueCommand(std::move(cmd));
 
     return result.get();

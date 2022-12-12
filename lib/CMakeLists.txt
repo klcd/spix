@@ -44,6 +44,8 @@ set(SOURCES
     src/Commands/DropFromExt.h
     src/Commands/EnterKey.cpp
     src/Commands/EnterKey.h
+    src/Commands/Exists.cpp
+    src/Commands/Exists.h
     src/Commands/ExistsAndVisible.cpp
     src/Commands/ExistsAndVisible.h
     src/Commands/GetBoundingBox.cpp
@@ -94,7 +96,7 @@ set(SOURCES
     src/Scene/Qt/QtScene.cpp
     src/Scene/Qt/QtScene.h
     src/Scene/Scene.h
-    
+
     src/Utils/AnyRpcUtils.cpp
     src/Utils/AnyRpcUtils.h
     src/Utils/AnyRpcFunction.h
