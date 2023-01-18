@@ -11,11 +11,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, windows-latest, macos-latest, macos-10.15]
-        build_type: ['Release', 'Debug']
-        qt_version: [[5, 12, 12], [5, 15, 2], [6, 2, 3]]
-        shared_libs: ['ON', 'OFF']
-        tests: ['ON', 'OFF']
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        build_type: ['Debug']
+        qt_version: [[5, 15, 2], [6, 2, 3]]
+        shared_libs: ['OFF']
+        tests: ['ON']
         include:
           - os: ubuntu-latest
             triplet: 'x64-linux'
@@ -23,27 +23,12 @@ jobs:
           - os: ubuntu-latest
             triplet: 'x64-linux'
             cmake_flags: '-DCMAKE_CXX_COMPILER=clang++'
-          - os: ubuntu-20.04
-            triplet: 'x64-linux'
-            cmake_flags: '-DCMAKE_CXX_COMPILER=g++'
           - os: windows-latest
             triplet: 'x64-windows'
             cmake_flags: '"-DAnyRPC_ROOT=C:/Program Files (x86)/AnyRPC" "-DGTest_ROOT=C:/Program Files (x86)/googletest-distribution"'
           - os: macos-latest
             triplet: 'x64-osx'
             cmake_flags: ''
-          - os: macos-10.15
-            triplet: 'x64-osx'
-            cmake_flags: ''
-        exclude:
-          # tests won't build with shared libs due to private symbols
-          - shared_libs: 'ON'
-            tests: 'ON'
-          - shared_libs: 'OFF'
-            tests: 'OFF'
-          # Disabled until https://github.com/sgieseking/anyrpc/pull/43 is in place
-          - os: windows-latest
-            shared_libs: 'ON'
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2

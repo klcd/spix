@@ -14,8 +14,7 @@
 using Variant = spix::Variant;
 using QMLReturnVariant = spix::qt::QMLReturnVariant;
 
-class QtItemToolsTestWithQMLEngine : public QMLEngineTest {
-};
+class QtItemToolsTestWithQMLEngine : public QMLEngineTest {};
 
 TEST(QtItemToolsTest, NullToQVariant)
 {

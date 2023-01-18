@@ -9,8 +9,7 @@
 namespace spix {
 
 struct KeyCodes {
-    enum : int
-    {
+    enum : int {
         Escape = 0x01000000,
         Tab = 0x01000001,
         Backtab = 0x01000002,
@@ -145,8 +144,7 @@ struct KeyCodes {
 
 using KeyModifier = unsigned;
 struct KeyModifiers {
-    enum : KeyModifier
-    {
+    enum : KeyModifier {
         None = 0,
         Shift = 1 << 0,
         Control = 1 << 1,
@@ -157,8 +155,7 @@ struct KeyModifiers {
 
 using MouseButton = unsigned;
 struct MouseButtons {
-    enum : MouseButton
-    {
+    enum : MouseButton {
         None = 0,
         Left = 1 << 0,
         Right = 1 << 1,
