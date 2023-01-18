@@ -16,8 +16,7 @@
 using Variant = spix::Variant;
 using QMLReturnVariant = spix::qt::QMLReturnVariant;
 
-class QtItemTestWithQMLEngine : public QMLEngineTest {
-};
+class QtItemTestWithQMLEngine : public QMLEngineTest {};
 
 template <class... Ts>
 QList<QList<QVariant>> MakeQSpyCall(Ts... args)

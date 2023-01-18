@@ -40,8 +40,7 @@ struct SPIX_EXPORT Variant : VariantBaseType {
     VariantBaseType const& base() const { return *this; }
     VariantBaseType& base() { return *this; }
 
-    enum TypeIndex
-    {
+    enum TypeIndex {
         Nullptr = 0,
         Bool,
         Int,
