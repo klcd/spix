@@ -84,8 +84,13 @@ AnyRpcServer::AnyRpcServer(int anyrpcPort)
             return std::vector<double> {bounds.topLeft.x, bounds.topLeft.y, bounds.size.width, bounds.size.height};
         });
 
+    utils::AddFunctionToAnyRpc<bool(std::string)>(methodManager, "exists",
+        "Returns true if the given object exists | exists(string path) : bool exists_and_visible",
+        [this](std::string path) { return exists(std::move(path)); });
+
     utils::AddFunctionToAnyRpc<bool(std::string)>(methodManager, "existsAndVisible",
-        "Returns true if the given object exists | existsAndVisible(string path) : bool exists_and_visible",
+        "Returns true if the given object exists and property visible is true| existsAndVisible(string path) : bool "
+        "exists_and_visible",
         [this](std::string path) { return existsAndVisible(std::move(path)); });
 
     utils::AddFunctionToAnyRpc<std::vector<std::string>()>(methodManager, "getErrors",
